@@ -1,0 +1,349 @@
+body{
+  font: 15px/1.5 'Roboto', sans-serif;  
+  padding:0;
+  margin:0;
+  background-color:#f4f4f4;
+}
+
+/*html {
+  overflow:   scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; 
+}
+*/
+
+/* Global */
+.container{
+  margin:auto;
+  overflow:hidden;
+}
+
+ul{
+  margin:0;
+  padding:0;
+}
+
+.dark{
+  padding:15px;
+  background:#35424a;
+  color: #5e94eb;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+/* Header **/
+header{
+  background: gray;
+  color: black;
+  padding-top:5px;
+  min-height:50px;
+  /*border-bottom: #3D405B 3px solid;*/
+  position:relative;
+  width: 100%;
+  font-family: 'Oswald', sans-serif;
+}
+
+header .container{
+  width:80%;
+}
+
+header a{
+  color: black;
+  text-decoration:none;
+  text-transform: uppercase;
+  font-size:16px;
+}
+
+header li{
+  display:inline;
+  padding: 0 20px 0 20px;
+}
+
+header #branding{
+  float:left;
+}
+
+header #branding h1{
+  margin:0;
+}
+
+header nav{
+  float:right;
+  margin-top:11px;
+}
+
+header .highlight, header .current a{
+  color: #F35E6A;
+  font-weight:bold;
+}
+
+header a:hover{
+  color:#cccccc;
+}
+
+/* Showcase */
+#showcase{
+  min-height:550px;
+  background:white;
+  text-align:center;
+  color: black;
+
+}
+
+#showcase h1{
+  margin-top:50px;
+  font-size:55px;
+  margin-bottom:10px;
+  background:white;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+#showcase p{
+  font-size:20px;
+  background:white;
+}
+
+#first{
+  min-height:600px;
+  background:#eef9bf;
+  text-align:center;
+  color: black;
+
+}
+#first h1{
+  margin-top:75px;
+  font-size:55px;
+  margin-bottom:10px;
+  font-family: 'Shadows Into Light', cursive;
+}
+#first p{
+  font-size:20px;
+  margin-left:350px;
+  margin-right:350px;
+}
+
+#second{
+  min-height:600px;
+  background:#75b79e;
+  text-align:center;
+  color: black;
+
+}
+#second h1{
+  margin-top:75px;
+  font-size:55px;
+  margin-bottom:10px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+#second h2{
+  font-weight: normal;
+}
+
+#second p{
+  font-size:20px;
+  margin-left:350px;
+  margin-right:350px;
+}
+
+#third{
+  min-height:600px;
+  background:#6a8caf;
+  text-align:center;
+  color: black;
+}
+#third h1{
+  margin-top:75px;
+  font-size:55px;
+  margin-bottom:10px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+#third p{
+  font-size:20px;
+  margin-left:350px;
+  margin-right:350px;
+}
+
+#fourth {
+  min-height:600px;
+  background:#3D405B;
+  text-align:center;
+  color: white;
+}
+#fourth h1{
+  margin-top:75px;
+  font-size:55px;
+  margin-bottom:10px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+#fourth h2{
+  font-size:20px;
+  font-weight: normal;
+}
+
+#fourth p{
+  font-size:20px;
+  margin-left:350px;
+  margin-right:350px;
+}
+
+#fifth {
+  min-height:0px;
+  background:white;
+  text-align:center;
+  color: black;
+}
+
+#fifth h1{
+  margin-top:75px;
+  font-size:55px;
+  margin-bottom:10px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+#fifth h2{
+  margin-top:10px;
+  font-size:20px;
+  font-weight: normal;
+}
+
+#sixth {
+  min-height:0px;
+  background:#F35E6A;
+  text-align:center;
+  color: black;
+}
+
+#sixth h1{
+  margin-top:75px;
+  font-size:55px;
+  margin-bottom:10px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+#sixth p{
+  font-size:20px;
+  margin-left:350px;
+  margin-right:350px;
+}
+
+/* footer */
+#footer{
+  min-height:0px;
+  padding-top:0px;
+  margin-top:0px;
+  background:black;
+  text-align:center;
+  color: white;
+}
+#footer h1{
+  margin-top:75px;
+  font-size:55px;
+  margin-bottom:10px;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+#footer h2{
+  margin-top:20px;
+  font-size:16px;
+  color: white;
+}
+
+#footer p{
+  font-size: 8px;
+  color: white;
+}
+
+#footer a{ text-decoration: none; color:white; }
+
+#footer a:visited { text-decoration: none; color:white; }
+#footer a:focus { text-decoration: none; color:white; }
+#footer a:hover { text-decoration: none ; color:blue; }
+#footer a:active { text-decoration: none; color:white; }
+
+.button {
+    background-color: #555555;
+    border: none;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    border-radius:10px;
+  }
+
+  .button:hover {
+    background-color: #999999;
+    color: white;
+  }
+
+  @media only screen and (max-width: 1300px) {
+    h2 {
+      padding-left:50px;
+      padding-right:50px;
+    }
+
+    p {
+      margin-left:0px !important;
+      margin-right:0px !important;
+      width:100% !important;
+   }
+ } 
+
+/* FOR THE HOURS/TUTORS THINGIE*/
+/* Three columns side by side */
+ .column {
+  float: left;
+  margin-bottom: 16px;
+  padding: 0 8px;
+  width:33.33%;
+  margin-right: 0px;
+  margin-left:0px;
+  padding-right: 0px;
+  padding-left: 0px;
+
+} 
+
+/* Add some shadows to create a card effect */
+/* .card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+} */
+
+/* Some left and right padding inside the container */
+/* .container {
+  padding: 0 16px;
+} */
+
+/* Clear floats */
+.container::after, .row::after {
+  content: "";
+  clear: both;
+  display: table;
+} 
+
+.title {
+  color: grey;  
+
+}
+
+ .card h2 {
+  font-size: 30px;
+  padding-top: 0%;
+  margin-bottom: 0;
+  text-align: center;
+  color: black;
+
+}
+
+p {
+    text-align: center;
+    color: black;
+}

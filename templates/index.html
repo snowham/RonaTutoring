@@ -1,0 +1,23 @@
+<head>  
+  <link rel="canonical" href="home"/>
+  <noscript>
+    <meta http-equiv="refresh" content="0;URL=home">
+  </noscript>
+  <!--[if lt IE 9]>
+  <script type="text/javascript">
+    var IE_fix=true;
+  </script>
+  <![endif]-->
+  <script type="text/javascript">
+    var url = "home";
+    if(typeof IE_fix != "undefined")
+    {
+      document.write("redirecting..."); 
+      var referLink = document.createElement("a");
+      referLink.href = url;
+      document.body.appendChild(referLink);
+      referLink.click();
+    }
+    else { window.location.replace(url); }
+  </script>
+</head>  
