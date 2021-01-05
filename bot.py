@@ -228,4 +228,4 @@ async def deletePair(ctx, *, inpt):
 
 # Run bot
 client.loop.create_task(send_requests())
-client.run('Nzg1OTc2MzE5NDg5OTk4ODk4.X8_rfQ.qOXnzmcD1n9zGVB6iHsdsU4KryQ')
+client.run('Nzg1OTc2MzE5NDg5OTk4ODk4.X8_rfQ.IUzfWED5sfvfNbMkjybDfA2863c')
