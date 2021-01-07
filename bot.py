@@ -153,7 +153,8 @@ To Be Tutored In: **{subjects}**
 Specific Classes: **{newPair['specificClass']}**
 Here is the email format so you can reach out to the student to start tutoring sessions
 https://docs.google.com/document/d/1Ooo0VTK1_YbEP9EgCfzg7kgqINXXkns70a5M3UWP32w/edit?usp=sharing
-If you have any questions or there's anything wrong, please ask someone from the Operations Team in the Rona Tutoring Server'''
+If you would ever like to stop tutoring the student, use this command in this DM: "rona stopTutoring {newPair['parentContact']} {newPair['studentFullName']}".
+If you have any questions or there's anything wrong, please ask someone from the Operations Team in the Rona Tutoring Server.'''
             await message.channel.send(student_info)    
 
     # If they said no:
@@ -161,7 +162,7 @@ If you have any questions or there's anything wrong, please ask someone from the
         # If the tutor has the student
         if len(currentPair) == 1:
             # Tell them
-            await message.channel.send('You still have this student. If you would like to stop tutoring the student, please inform someone from Operations in the Rona Tutoring Server.')
+            await message.channel.send('You still have this student. If you would like to stop tutoring the student, use the command: "rona stopTutoring <parent email> <student full name>". If that doesn\'t work, please inform someone from the Operations Team in the Rona Tutoring Server.')
         # If the tutor doesn't have the student
         elif len(currentPair) == 0:
             # Reply
@@ -184,9 +185,9 @@ async def on_member_join(member):
 async def on_member_remove(member):
     print(f'{member} has left this server.')
 
-# When a tutor doesn't want to continue with Rona Tutoring, someone can run this in the staff-commands channel
+# When a tutor doesn't want to continue with Rona Tutoring, SOMEONE ELSE can run this in the staff-commands channel
 @client.command()
-async def deleteTutor(ctx, *, tutorId):
+async def deleteTutor(ctx, *, tutorId=None):
     # Make sure message is in staff-commands channel
     if str(ctx.channel) != 'staff-commands':
         await ctx.send("You can only use this command in the staff-commands channel.")
@@ -202,10 +203,10 @@ async def deleteTutor(ctx, *, tutorId):
     except:
         await ctx.send("Something went wrong. Please make sure you format your command as \"rona deleteTutor <tutor id>\"")
 
-# When a tutor can't tutor a specific student or vice versa, someone can run this in the staff-commands channel
+# When a tutor can't tutor a specific student or vice versa, SOMEONE ELSE can run this in the staff-commands channel
 # Inputs tutorId, parentContact, and studentFullName
 @client.command()
-async def deletePair(ctx, *, inpt):
+async def deletePair(ctx, *, inpt=None):
     # Make sure message is in staff-commands channel
     if str(ctx.channel) != 'staff-commands':
         await ctx.send("You can only use this command in the staff-commands channel.")
@@ -221,10 +222,31 @@ async def deletePair(ctx, *, inpt):
         if db_funcs.deletePair(conn, cur, tutorId, parentContact, studentFullName):
             await ctx.send("This tutor student pair has been deleted from the tutor student tracker in the database.")
         else:
-            await ctx.send("The number/id, parent contact, and/or student full name you inputted do(es) not exist in the database.")
+            await ctx.send("The number/id, parent email, and/or student full name you inputted do(es) not exist in the database.")
     # If doesn't work, report back
     except:
-        await ctx.send("Something went wrong. Please make sure you format your command as \"rona deletePair <tutor id> <parent contact> <student full name>\"")
+        await ctx.send("Something went wrong. Please make sure you format your command as \"rona deletePair <tutor id> <parent email> <student full name>\"")
+
+# When a tutor can't tutor a specific student or vice versa, THEY can run this in their DM with the bot
+# Inputs parentContact and studentFullName
+@client.command()
+async def stopTutoring(ctx, *, inpt=None):
+    # Make sure message is in DM channel
+    if not isinstance(ctx.channel, discord.DMChannel):
+        await ctx.send("You can only use this command in a DM with the Rona Tutoring Bot.")
+        return
+    # Try to delete tutor student pair
+    try:
+        inpt = inpt.strip()
+        parentContact = inpt[:inpt.find(' ')]
+        studentFullName = inpt[inpt.find(' ')+1:]
+        if db_funcs.deletePair(conn, cur, ctx.author.id, parentContact, studentFullName):
+            await ctx.send("You now don't have to tutor this student anymore. If you want to tutor someone else, you can go to the tutor-requests channel in the Rona Tutoring Server and react to a student that you would like to tutor.")
+        else:
+            await ctx.send("Something went wrong. Please make sure you format your command as \"rona stopTutoring <parent email> <student full name>\", and make sure the student's parent email and full name are correct. \nYou'll get the parent email and student full name from the message that this bot sent you with all of the student's information.")
+    # If doesn't work, report back
+    except:
+        await ctx.send("Something went wrong. Please make sure you format your command as \"rona stopTutoring <parent email> <student full name>\", and make sure the student's parent email and full name are correct. \nYou'll get the parent email and student full name from the message that this bot sent you with all of the student's information.")
 
 # Run bot
 client.loop.create_task(send_requests())
