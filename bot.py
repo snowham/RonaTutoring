@@ -250,4 +250,4 @@ async def stopTutoring(ctx, *, inpt=None):
 
 # Run bot
 client.loop.create_task(send_requests())
-client.run('Nzg1OTc2MzE5NDg5OTk4ODk4.X8_rfQ.IUzfWED5sfvfNbMkjybDfA2863c')
+client.run('Nzg1OTc2MzE5NDg5OTk4ODk4.X8_rfQ.tLg4YfMqs4lGSZNLY5J0AbNwg4I')
