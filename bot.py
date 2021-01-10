@@ -11,9 +11,13 @@ conn.row_factory = sqlite3.Row
 cur = conn.cursor()
 
 # Constants
+server_id = 704196952308318250
+tutor_requests_id = 770039042741764146
+bot_id = 785976319489998898
 tellTutorToReact = '''
             
 React to this message with an emoji of your choice if you're interested in taking this request. Our discord bot will reach out to those interested with more details.'''
+
 
 # Send tutor requests to tutor-request channel every 2 hours
 async def send_requests():
@@ -21,7 +25,7 @@ async def send_requests():
     while True:
         # Delete all requests
         while True:
-            deleted = await client.get_guild(671509704157167646).get_channel(787592274119884843).purge(limit=100)
+            deleted = await client.get_guild(server_id).get_channel(tutor_requests_id).purge(limit=100)
             if len(deleted) == 0:
                 break
 
@@ -31,7 +35,7 @@ async def send_requests():
         discordMessages = [row['discordMessage'] for row in rows]
         for message in discordMessages:
             # Send pending request message
-            await client.get_guild(671509704157167646).get_channel(787592274119884843).send(f"{client.get_guild(671509704157167646).default_role} {message}")
+            await client.get_guild(server_id).get_channel(tutor_requests_id).send(f"{client.get_guild(server_id).default_role} {message}")
 
         # Wait 2 hours for reactions from tutors
         await asyncio.sleep(30)
@@ -40,7 +44,7 @@ async def send_requests():
         counters = cur.fetchall()
         tutorIds = [counter['tutorId'] for counter in counters]
         # Go through all pending requests from this 2 hour period
-        async for message in client.get_guild(671509704157167646).get_channel(787592274119884843).history():
+        async for message in client.get_guild(server_id).get_channel(tutor_requests_id).history():
             if len(message.reactions) >= 1:
                 # Send confirmation messages to all people who reacted
                 # Some people might have reacted twice or more with different emojis; we want to send a confirmation message to them only ONCE
@@ -83,8 +87,8 @@ async def on_ready():
 
 @client.listen('on_message')
 async def confirmation(message):
-    # If message is in DM, is possibly a reply to a confirmation message, and is not from the bot itself (bot's id is 785976319489998898), then continue, else return
-    if not (isinstance(message.channel, discord.DMChannel) and (message.content.startswith('yes ') or message.content.startswith('no ')) and (message.author.id != 785976319489998898)):
+    # If message is in DM, is possibly a reply to a confirmation message, and is not from the bot itself, then continue, else return
+    if not (isinstance(message.channel, discord.DMChannel) and (message.content.startswith('yes ') or message.content.startswith('no ')) and (message.author.id != bot_id)):
         return
 
     # Extract the "yes " or "no " and try to get the confirmationMessageIndex, if doesn't work return
@@ -250,4 +254,4 @@ async def stopTutoring(ctx, *, inpt=None):
 
 # Run bot
 client.loop.create_task(send_requests())
-client.run('Nzg1OTc2MzE5NDg5OTk4ODk4.X8_rfQ.IUzfWED5sfvfNbMkjybDfA2863c')
+client.run('Nzg1OTc2MzE5NDg5OTk4ODk4.X8_rfQ.tLg4YfMqs4lGSZNLY5J0AbNwg4I')
