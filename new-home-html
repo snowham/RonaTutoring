@@ -8,7 +8,8 @@
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());  gtag('config', 'UA-175453864-1');
+  gtag('js', new Date());
+  gtag('config', 'UA-175453864-1');
   </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
@@ -180,14 +181,12 @@
           <input type="email" id="parentContact" name="parentContact" onkeydown="return event.key != 'Enter';" required pattern="\S(.*\S)?"><br><br>
 
           <label for="availability">When are you available?</label><br>
-          <input type="text" id="availability" name="availability" onkeydown="return event.key != 'Enter';" required pattern="\S(.*\S)?"><br><br>
+          <input type="text" id="availability" name="availability" onkeydown="return event.key != 'Enter';" required pattern="\S(.*\S)?">
 
           <br>
 
           <!-- <hr style="width: 100%" /> -->
           <p>__________________________________________________________________</p>
-
-          <br>
 
           <!--section 4-->
           <h5>How did you hear about us?</h5> 
@@ -201,7 +200,7 @@
           <label for="friendsnfam">Friends or Family</label><br>
           <input type="radio" id="fromOther" name="marketingSource" value="fromOther" onkeydown="return event.key != 'Enter';">
           <label for="otherWay"> Other </label>
-          <input type="text" id="otherWay" name="otherWay" onkeydown="return event.key != 'Enter';"><br><br>
+          <input type="text" id="otherWay" name="otherWay" onkeydown="return event.key != 'Enter';"><br>
 
           <!-- <hr style="width: 100%" /> -->
           <p>__________________________________________________________________</p>
