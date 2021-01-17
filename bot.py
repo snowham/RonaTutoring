@@ -12,7 +12,7 @@ cur = conn.cursor()
 
 # Constants
 server_id = 704196952308318250
-tutor_requests_id = 770039042741764146
+tutor_requests_id = 705982389234696284
 bot_id = 785976319489998898
 tellTutorToReact = '''
             
@@ -38,7 +38,7 @@ async def send_requests():
             await client.get_guild(server_id).get_channel(tutor_requests_id).send(f"{client.get_guild(server_id).default_role} {message}")
 
         # Wait 2 hours for reactions from tutors
-        await asyncio.sleep(30)
+        await asyncio.sleep(3600)
 
         # Go through all pending requests from this 2 hour period
         async for message in client.get_guild(server_id).get_channel(tutor_requests_id).history():
