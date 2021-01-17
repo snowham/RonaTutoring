@@ -11,8 +11,8 @@ conn.row_factory = sqlite3.Row
 cur = conn.cursor()
 
 # Constants
-server_id = 704196952308318250
-tutor_requests_id = 770039042741764146
+server_id = 671509704157167646
+tutor_requests_id = 787592274119884843
 bot_id = 785976319489998898
 tellTutorToReact = '''
             
