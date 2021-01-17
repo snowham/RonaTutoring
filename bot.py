@@ -11,8 +11,8 @@ conn.row_factory = sqlite3.Row
 cur = conn.cursor()
 
 # Constants
-server_id = 671509704157167646
-tutor_requests_id = 787592274119884843
+server_id = 704196952308318250
+tutor_requests_id = 770039042741764146
 bot_id = 785976319489998898
 tellTutorToReact = '''
             
@@ -40,12 +40,14 @@ async def send_requests():
         # Wait 2 hours for reactions from tutors
         await asyncio.sleep(30)
 
-        cur.execute("SELECT * FROM confirmation_message_counters")
-        counters = cur.fetchall()
-        tutorIds = [counter['tutorId'] for counter in counters]
         # Go through all pending requests from this 2 hour period
         async for message in client.get_guild(server_id).get_channel(tutor_requests_id).history():
             if len(message.reactions) >= 1:
+                # Get all the tutor ids from the confirmation_message_counters table
+                cur.execute("SELECT * FROM confirmation_message_counters")
+                counters = cur.fetchall()
+                tutorIds = [counter['tutorId'] for counter in counters]
+
                 # Send confirmation messages to all people who reacted
                 # Some people might have reacted twice or more with different emojis; we want to send a confirmation message to them only ONCE
                 ids = []
@@ -55,9 +57,7 @@ async def send_requests():
                             # Make sure the tutor only gets a confirmation given a specific discordMessage ONCE
                             cur.execute('SELECT * FROM pending_confirmations WHERE tutorId = ? AND discordMessage = ?', (user.id, message.content))
                             alreadyInPendingConfirmations = len(cur.fetchall()) == 1
-                            cur.execute('SELECT * FROM tutor_student_tracker WHERE discordMessage = ?', (message.content,))
-                            alreadyInTutorStudentTracker = len(cur.fetchall()) >= 1
-                            if alreadyInPendingConfirmations or alreadyInTutorStudentTracker:
+                            if alreadyInPendingConfirmations:
                                 continue
 
                             # If this is the first time a tutor reacted to a request, initialize the confirmationMessageCount to 1 in the confirmation_message_counters table
@@ -181,8 +181,8 @@ If you have any questions or there's anything wrong, please ask someone from the
 async def on_member_join(member):
     print(f'{member} has joined this server.')
     for channel in member.guild.channels:
-        if str(channel) == "welcome":
-            await channel.send(f"Hi {member.mention}! Welcome!")
+        if str(channel) == "random":
+            await channel.send(f"Hi {member.mention}, welcome to the Rona Tutoring Server!!")
 
 # Track when users leave server
 @client.event
