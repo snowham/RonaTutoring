@@ -27,9 +27,9 @@ def essay_editing():
 def resources():
     return render_template('resources.html')
 
-@app.route('/our-team')
-def our_team():
-    return render_template('our-team.html')
+# @app.route('/our-team')
+# def our_team():
+#     return render_template('our-team.html')
 
 @app.route('/join-us')
 def join_us():
