@@ -25,7 +25,10 @@ async def send_requests():
     while True:
         # Delete all requests
         while True:
-            deleted = await client.get_guild(server_id).get_channel(tutor_requests_id).purge(limit=100)
+            try:
+                deleted = await client.get_guild(server_id).get_channel(tutor_requests_id).purge(limit=99)
+            execpt:
+                pass
             if len(deleted) == 0:
                 break
 
