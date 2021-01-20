@@ -40,8 +40,8 @@ async def send_requests():
             # Send pending request message
             await client.get_guild(server_id).get_channel(tutor_requests_id).send(f"{client.get_guild(server_id).default_role} {message}")
 
-        # Wait 2 hours for reactions from tutors
-        await asyncio.sleep(3600)
+        # Wait 1 day for reactions from tutors
+        await asyncio.sleep(86400)
 
         # Go through all pending requests from this 2 hour period
         async for message in client.get_guild(server_id).get_channel(tutor_requests_id).history():
