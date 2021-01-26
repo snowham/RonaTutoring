@@ -143,3 +143,24 @@ def deletePair(conn, cur, tutorId, parentContact, studentFullName):
     conn.commit()
 
     return deleted
+
+def reassignStudent(conn, cur, tutorId, parentContact, studentFullName):
+    # Check if the student exists and if they have a tutor
+    cur.execute('SELECT * FROM tutor_student_tracker WHERE tutorId = ? AND parentContact = ? AND studentFullName = ?', (tutorId, parentContact, studentFullName))
+    pair = cur.fetchall()
+    if not bool(pair):
+        return False
+
+    # Delete tutor student pair from database
+    cur.execute('DELETE FROM tutor_student_tracker WHERE tutorId = ? AND parentContact = ? AND studentFullName = ?', (tutorId, parentContact, studentFullName))
+
+    # Add student back to pending requests
+    cur.execute('''INSERT INTO pending_requests 
+    (studentFullName, parentFullName, location, age, grade, availability, marketingSource, studentContact, 
+    parentContact, math, science, english, history, compsci, otherSubj, specificClass, additional, discordMessage)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', tuple(pair[3:]))
+
+    # Commit
+    conn.commit()
+
+    return True

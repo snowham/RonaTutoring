@@ -24,11 +24,9 @@ async def send_requests():
     await client.wait_until_ready()
     while True:
         # Delete all requests
+        deleted = [1]
         while True:
-            try:
-                deleted = await client.get_guild(server_id).get_channel(tutor_requests_id).purge(limit=99)
-            except:
-                pass
+            deleted = await client.get_guild(server_id).get_channel(tutor_requests_id).purge()
             if len(deleted) == 0:
                 break
 
@@ -210,7 +208,7 @@ async def deleteTutor(ctx, *, tutorId=None):
     except:
         await ctx.send("Something went wrong. Please make sure you format your command as \"rona deleteTutor <tutor id>\"")
 
-# When a tutor can't tutor a specific student or vice versa, SOMEONE ELSE can run this in the staff-commands channel
+# Deletes tutor-student pair from database. Student DOES NOT go back to pending requests
 # Inputs tutorId, parentContact, and studentFullName
 @client.command()
 async def deletePair(ctx, *, inpt=None):
@@ -234,6 +232,31 @@ async def deletePair(ctx, *, inpt=None):
     except:
         await ctx.send("Something went wrong. Please make sure you format your command as \"rona deletePair <tutor id> <parent email> <student full name>\"")
 
+# Deletes tutor-student pair from database. Student DOES go back to pending requests
+# Inputs tutorId, parentContact, and studentFullName
+@client.command()
+async def reassignStudent(ctx, *, inpt=None):
+    # Make sure message is in staff-commands channel
+    if str(ctx.channel) != 'staff-commands':
+        await ctx.send("You can only use this command in the staff-commands channel.")
+        return
+    # Try to reassign student
+    try:
+        inpt = inpt.strip()
+        tutorId = inpt[:inpt.find(' ')]
+        tutorId = int(tutorId)
+        inpt = inpt[inpt.find(' ')+1:]
+        parentContact = inpt[:inpt.find(' ')]
+        studentFullName = inpt[inpt.find(' ')+1:]
+        if db_funcs.reassignStudent(conn, cur, tutorId, parentContact, studentFullName):
+            await ctx.send("This tutor student pair has been deleted from the tutor student tracker in the database, and the student has been readded to the pending requests.")
+        else:
+            await ctx.send("The number/id, parent email, and/or student full name you inputted do(es) not exist in the database.")
+    # If doesn't work, report back
+    except:
+        await ctx.send("Something went wrong. Please make sure you format your command as \"rona reassignStudent <tutor id> <parent email> <student full name>\"")
+
+'''
 # When a tutor can't tutor a specific student or vice versa, THEY can run this in their DM with the bot
 # Inputs parentContact and studentFullName
 @client.command()
@@ -254,6 +277,7 @@ async def stopTutoring(ctx, *, inpt=None):
     # If doesn't work, report back
     except:
         await ctx.send("Something went wrong. Please make sure you format your command as \"rona stopTutoring <parent email> <student full name>\", and make sure the student's parent email and full name are correct. \nYou'll get the parent email and student full name from the message that this bot sent you with all of the student's information.")
+'''
 
 # Run bot
 client.loop.create_task(send_requests())
