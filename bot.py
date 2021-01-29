@@ -158,7 +158,7 @@ To Be Tutored In: **{subjects}**
 Specific Classes: **{newPair['specificClass']}**
 Here is the email format so you can reach out to the student to start tutoring sessions
 https://docs.google.com/document/d/1Ooo0VTK1_YbEP9EgCfzg7kgqINXXkns70a5M3UWP32w/edit?usp=sharing
-If you would ever like to stop tutoring the student, use this command in this DM: "rona stopTutoring {newPair['parentContact']} {newPair['studentFullName']}".
+If you have any issues with your student, please send someone on the Operations team a screenshot of this message with the caption "{newPair['parentContact']} {newPair['studentFullName']}". 
 If you have any questions or there's anything wrong, please ask someone from the Operations Team in the Rona Tutoring Server.'''
             await message.channel.send(student_info)    
 
