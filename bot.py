@@ -11,6 +11,7 @@ conn.row_factory = sqlite3.Row
 cur = conn.cursor()
 
 # Constants
+discord_token = os.environ.get("DISCORD_TOKEN")
 server_id = 704196952308318250
 tutor_requests_id = 705982389234696284
 bot_id = 785976319489998898
@@ -281,4 +282,4 @@ async def stopTutoring(ctx, *, inpt=None):
 
 # Run bot
 client.loop.create_task(send_requests())
-client.run('Nzg1OTc2MzE5NDg5OTk4ODk4.X8_rfQ.tLg4YfMqs4lGSZNLY5J0AbNwg4I')
+client.run(discord_token)
