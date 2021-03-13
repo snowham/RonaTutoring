@@ -1,4 +1,4 @@
-import discord, sqlite3, asyncio, db_funcs
+import discord, sqlite3, asyncio, db_funcs, os
 from discord.ext import commands, tasks
 
 # Initialize bot
