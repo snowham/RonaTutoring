@@ -257,7 +257,7 @@ async def reassignStudent(ctx, *, inpt=None):
     except:
         await ctx.send("Something went wrong. Please make sure you format your command as \"rona reassignStudent <tutor id> <parent email> <student full name>\"")
 
-'''
+
 # When a tutor can't tutor a specific student or vice versa, THEY can run this in their DM with the bot
 # Inputs parentContact and studentFullName
 @client.command()
@@ -278,7 +278,6 @@ async def stopTutoring(ctx, *, inpt=None):
     # If doesn't work, report back
     except:
         await ctx.send("Something went wrong. Please make sure you format your command as \"rona stopTutoring <parent email> <student full name>\", and make sure the student's parent email and full name are correct. \nYou'll get the parent email and student full name from the message that this bot sent you with all of the student's information.")
-'''
 
 # Run bot
 client.loop.create_task(send_requests())
